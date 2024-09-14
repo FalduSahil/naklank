@@ -15,10 +15,13 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
+            $table->string('number')->nullable();
+            $table->string('address')->nullable();
+            $table->enum('user_type', ['admin', 'user'])->default('user');
+            $table->enum('status', ['active', 'inactive'])->default('inactive');
             $table->string('password');
-            $table->rememberToken();
-            $table->timestamps();
+            $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->useCurrent()->useCurrentOnUpdate();
         });
     }
 
