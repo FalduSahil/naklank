@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\Auth\AdminAuthController;
 use App\Http\Controllers\Admin\Common\CommonController;
+use App\Http\Controllers\Admin\Order\OrderController;
 use App\Http\Controllers\Admin\Product\ProductController;
 use App\Http\Controllers\Admin\User\UserController;
 use Illuminate\Support\Facades\Artisan;
@@ -55,6 +56,7 @@ Route::middleware(['auth', 'userAccess:admin', 'PreventBackHistory'])->prefix('a
 
     /*Profile*/
     Route::get('profile', [CommonController::class, 'profile'])->name('adminProfile');
+    Route::post('check-old-password', [CommonController::class, 'checkOldPassword'])->name('checkOldPassword');
     Route::post('update-profile', [CommonController::class, 'updateProfile'])->name('updateProfile');
 
     /*Users*/
@@ -69,6 +71,20 @@ Route::middleware(['auth', 'userAccess:admin', 'PreventBackHistory'])->prefix('a
 
     /*Categories*/
     Route::resource('categories', App\Http\Controllers\Admin\Category\CategoryController::class);
+
+    /*Orders*/
+    Route::resource('orders', App\Http\Controllers\Admin\Order\OrderController::class);
+    Route::post('update-order-status', [OrderController::class, 'updateOrderStatus'])->name('updateOrderStatus');
+    /*For Add Order*/
+    Route::post('fill-customer-details', [OrderController::class, 'fillCustomerDetails'])->name('fillCustomerDetails');
+
+    /*Inquiries*/
+    Route::resource('inquiries', App\Http\Controllers\Admin\Inquiry\InquiryController::class);
+
+    /*For Edit Order*/
+    Route::post('add-products-for-order', [OrderController::class, 'addProducts'])->name('addProducts');
+    Route::post('check-quantity', [OrderController::class, 'checkQuantity'])->name('checkQuantity');
+    Route::post('update-order', [OrderController::class, 'updateOrder'])->name('updateOrder');
 
     /*Dropzone Routes*/
     Route::post('upload-images', [ProductController::class, 'uploadImages'])->name('uploadImages');

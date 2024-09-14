@@ -1,6 +1,8 @@
 @extends('admin.layout.app')
 
-@section('title', 'Add Products')
+@php($isView = request()->routeIs('products.show') ?? false)
+
+@section('title', $isEdit ? 'Edit Product' : ($isView ? 'View Product' : 'Add Product'))
 
 @push('styles')
     <link rel="stylesheet" href="{{ getPath('admin') }}/plugins/dropzone/dropzone.min.css" type="text/css"/>
@@ -8,14 +10,14 @@
 
 @section('content')
     <div class="content-wrapper">
-        @include('admin.includes.bread-crumbs', ['title' => 'Products', 'link' => route('products.index'), 'addOrEdit' => 'add'])
+        @include('admin.includes.bread-crumbs', ['title' => 'Products', 'link' => route('products.index'), 'addOrEdit' => $isEdit ? 'edit' : ($isView ? 'show' : 'add'), 'name' => $product->name ?? null])
         <div class="content">
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-12">
                         <div class="card card-secondary">
                             <div class="card-header">
-                                <h3 class="card-title">Add Product</h3>
+                                <h3 class="card-title">{{ $isEdit ? 'Edit' : ($isView ? 'View' : 'Add') }} Product</h3>
                                 <div class="card-tools">
                                     <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
                                         <i class="fas fa-minus"></i>
@@ -23,21 +25,25 @@
                                 </div>
                             </div>
                             <div class="card-body">
-                                <form id="addProduct" action="{{ route('products.store') }}" method="post" enctype="multipart/form-data">
+                                <form id="Product" action="{{ $isEdit ? route('products.update', $product) : route('products.store') }}" method="post" enctype="multipart/form-data">
                                     @csrf
+                                    @isset($product)
+                                        @method('PUT')
+                                        <input type="hidden" id="product_id" name="id" value="{{$product->id}}">
+                                    @endisset
                                     <div class="row">
                                         <div class="form-group col-6">
                                             <label for="name">Product Name</label>
-                                            <input type="text" id="name" name="name" class="form-control">
+                                            <input type="text" id="name" name="name" value="{{ old('name', ($isEdit || $isView ? $product->name : '')) }}" class="form-control">
                                             @error('name')
                                             <p class="mt-1 custom-error">{{ $message  }}</p>
                                             @enderror
                                         </div>
                                         <div class="form-group col-6">
-                                            <label for="code">Product Code</label>
-                                            <input type="text" id="code" name="product_code" class="form-control">
-                                            @error('product_code')
-                                            <p class="mt-1 custom-error">{{ $message }}</p>
+                                            <label for="slug">Product Slug</label>
+                                            <input type="text" id="slug" name="slug" value="{{ old('slug', ($isEdit || $isView ? $product->slug : '')) }}" class="form-control">
+                                            @error('slug')
+                                            <p class="mt-1 custom-error">{{ $message  }}</p>
                                             @enderror
                                         </div>
                                     </div>
@@ -45,54 +51,36 @@
                                         <div class="form-group col-12">
                                             <label for="description">Product Description</label>
                                             <textarea rows="5" type="text" id="description" name="description"
-                                                      class="form-control"></textarea>
+                                                      class="form-control">{{ old('description', ($isEdit || $isView ? $product->description : '')) }}</textarea>
                                             @error('description')
                                             <p class="mt-1 custom-error">{{ $message  }}</p>
                                             @enderror
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <div class="form-group col-6">
+                                        <div class="form-group col-3">
                                             <label for="category_id">Product Category</label>
                                             <select id="category_id" name="category_id" class="form-control">
                                                 <option selected="" disabled="">Select Category</option>
                                                 @foreach(getCategories() as $category)
-                                                    <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                                    <option @selected(old('category_id', ($isEdit || $isView ? $product->getCategory->id : '')) == $category->id) value="{{ $category->id }}">{{ $category->name }}</option>
                                                 @endforeach
                                             </select>
                                             @error('category_id')
                                             <p class="mt-1 custom-error">{{ $message  }}</p>
                                             @enderror
                                         </div>
-                                        <div class="form-group col-6">
-                                            <label for="label_id">Product Label</label>
-                                            <select id="label_id" name="label_id" class="form-control">
-                                                <option selected="" disabled="">Select Label</option>
-                                            </select>
-                                            @error('label_id')
-                                            <p class="mt-1 custom-error">{{ $message  }}</p>
-                                            @enderror
-                                        </div>
-                                    </div>
-                                    <div class="row">
                                         <div class="form-group col-3">
                                             <label for="price">Product Price</label>
-                                            <input min="1" type="number" value="" id="price" name="price" class="form-control">
+                                            <input min="1" type="number" value="{{ old('price', ($isEdit || $isView ? $product->price : '')) }}" id="price" name="price" class="form-control">
                                             @error('price')
                                             <p class="mt-1 custom-error">{{ $message  }}</p>
                                             @enderror
                                         </div>
                                         <div class="form-group col-3">
-                                            <label for="quantity">Box Quantity</label>
-                                            <input min="1" type="number" id="quantity" name="quantity" class="form-control">
+                                            <label for="quantity">Quantity</label>
+                                            <input min="1" type="number" id="quantity" name="quantity" value="{{ old('quantity', ($isEdit || $isView ? $product->quantity : '')) }}" class="form-control">
                                             @error('quantity')
-                                            <p class="mt-1 custom-error">{{ $message  }}</p>
-                                            @enderror
-                                        </div>
-                                        <div class="form-group col-3">
-                                            <label for="quantity">Per Box Piece</label>
-                                            <input min="1" type="number" id="per_box_quantity" name="per_box_quantity" class="form-control">
-                                            @error('per_box_quantity')
                                             <p class="mt-1 custom-error">{{ $message  }}</p>
                                             @enderror
                                         </div>
@@ -100,8 +88,9 @@
                                             <label for="status">Product Status</label>
                                             <select id="status" name="status" class="form-control">
                                                 <option selected="" disabled="">Select Status</option>
-                                                <option value="active">Active</option>
-                                                <option value="inactive">Inactive</option>
+                                                @foreach(getConstant("STATUS") as $key => $value)
+                                                    <option @selected(old('status', ($isEdit || $isView ? $product->status : '')) == $key) value="{{ $key }}">{{ $value }}</option>
+                                                @endforeach
                                             </select>
                                             @error('status')
                                             <p class="mt-1 custom-error">{{ $message  }}</p>
@@ -109,33 +98,16 @@
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <div class="form-group col-2">
-                                            <label for="product_for">Product For</label>
-                                            <select id="product_for" name="product_for" class="form-control">
-                                                <option selected="" disabled="">Select Product For</option>
-                                                @foreach(getConstant("PRODUCT_FOR") as $key => $value)
-                                                    <option value="{{ $value }}">{{ ucfirst($value) }}</option>
-                                                @endforeach
-                                            </select>
-                                            @error('product_for')
-                                            <p class="mt-1 custom-error">{{ $message  }}</p>
-                                            @enderror
-                                        </div>
-                                        <div class="form-group col-4">
-                                            <label for="slug">Product Slug</label>
-                                            <input type="text" id="slug" name="slug" value="" class="form-control">
-                                            @error('slug')
-                                            <p class="mt-1 custom-error">{{ $message  }}</p>
-                                            @enderror
-                                        </div>
                                         <div class="form-group col-3">
                                             <label for="selectimage">Product Images</label>
                                             <div class="input-group">
-                                                <a href="javascript:void(0);" class="form-control text-decoration-none" id="selectimage">Upload Images</a>
+                                                <a @if(request()->routeIs('products.show') !== true) disabled @endif href="javascript:void(0);"
+                                                   @class(['form-control', 'text-decoration-none', 'bg-secondary' => request()->routeIs('products.show'), 'bg-gradient'])
+                                                   id="selectimage">Upload Images</a>
                                                 <input type="hidden" name="images" id="images" value="" />
                                             </div>
                                             @error('images')
-                                            <p class="mt-1 custom-error">{{ $message  }}</p>
+                                            <p class="mt-1 custom-error">{{ $message }}</p>
                                             @enderror
                                         </div>
                                         <div class="form-group col-3">
@@ -150,18 +122,47 @@
                                             <p class="mt-1 custom-error">{{ $message  }}</p>
                                             @enderror
                                         </div>
+                                        @isset($product)
+                                            <div class="form-group col-2">
+                                                <img class="rounded" height="100" width="100"
+                                                     src="{{ asset(getConstant('PRODUCT_IMAGE_PATH').$product->main_image) }}">
+                                            </div>
+                                        @endisset
                                     </div>
                                     <div class="row">
-                                        <div class="form-group col-12">
-                                            <div class="pw dropzone"></div>
-                                        </div>
+                                        @isset($product)
+                                            <ul class="ps-0 list-unstyled list-inline pt-4 col-lg-11 col-xl-10">
+                                                @foreach($product->getProductImages as $images)
+                                                    <li id="removeId_{{ $images->id }}"
+                                                        class="upload-image-fix list-inline-item">
+                                                        <div class="dz-details">
+                                                            <img class="preview-image rounded mx-auto d-block"
+                                                                 src="{{ asset(getConstant('PRODUCT_IMAGE_PATH').$images->image) }}"/>
+                                                            @if(request()->routeIs('products.show') !== true)
+                                                            <a href="javascript:void(0);" data-id="{{ $images->id }}"
+                                                               class="btn btn-sm btn-danger text-decoration-none px-5 mt-2 mb-2 delete-product-image"
+                                                               onclick="" title="Delete Product Image">Delete</a>
+                                                            @endif
+                                                        </div>
+                                                    </li>
+                                                @endforeach
+                                            </ul>
+                                        @endisset
+                                            @if(request()->routeIs('products.show') !== true)
+                                                <div class="form-group col-12">
+                                                    <div class="pw dropzone"></div>
+                                                </div>
+                                            @endif
                                     </div>
-                                    <div class="row">
-                                        <div class="col-12">
-                                            <a href="{{ route('products.index') }}" class="btn btn-secondary">Cancel</a>
-                                            <input type="submit" value="Save" class="btn btn-success float-right">
+                                    @if(request()->routeIs('products.show') !== true)
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <a href="{{ route('products.index') }}"
+                                                   class="btn btn-secondary">Cancel</a>
+                                                <input type="submit" value="Save" class="btn btn-success float-right">
+                                            </div>
                                         </div>
-                                    </div>
+                                    @endif
                                 </form>
                             </div>
                         </div>
@@ -176,13 +177,14 @@
     <script src="{{ getPath('admin') }}/plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
     <script src="{{ getPath('admin') }}/plugins/dropzone/dropzone.min.js"></script>
     <script src="{{ getPath('admin') }}/plugins/jquery-validation/jquery.validate.min.js"></script>
+    <script src="{{ getPath('admin') }}/plugins/sweetalert2/sweetalert2.min.js"></script>
     <script src="{{ getPath('admin') }}/custom/js/custom.js"></script>
     <script>
         Dropzone.autoDiscover = false;
         bsCustomFileInput.init();
         $(function () {
             ajaxSetup();
-            validateRequest('addProduct', {
+            validateRequest('Product', {
                 name: {
                     required: true,
                 },
@@ -211,6 +213,7 @@
                         url: '{{ route('validateSlug') }}',
                         method: 'POST',
                         data: {
+                            'product_id': '{{ $product->id ?? '' }}',
                             '_token': '{{ csrf_token() }}'
                         },
                     },
@@ -246,7 +249,7 @@
                     required: "Please upload a image",
                 },
                 quantity: {
-                    required: "Please enter box quantity",
+                    required: "Please enter quantity",
                 },
                 per_box_quantity: {
                     required: "Please enter per box pieces",
@@ -306,23 +309,28 @@
                     });
                 }
             });
-
-            /*Get Labels By Category*/
-            $('#category_id').on('change', function () {
-                let $select = $(this);
-                let $labels = $('#label_id');
-                let $selectedValue = $select.val();
-                ajaxCall('{{ route('getLabels') }}', {'category_id': $selectedValue}, 'POST').then(function (response) {
+            $('#slug').on('click', function () {
+                let categoryName = $('#name').val(),
+                    slug = categoryName.toLowerCase().replace(/ /g, '-').replace(/[^\w-]+/g, '');
+                $(this).val(slug);
+            });
+            /*Delete Image*/
+            $(document).on('click', '.delete-product-image',function () {
+               let productId = $(this).data('id');
+                ajaxCall('{{ route('removeImage') }}', {'productId': productId}, 'POST', true).then(function (response) {
                     if(response.status === true){
-                        $labels.empty();
-                        if(response.html === ''){
-                            $labels.append('<option value="">No Labels Available</option>');
-                        } else {
-                            $labels.append(response.html);
-                        }
+                        $('#removeId_'+productId).remove();
+                        toastMsg({message: response.message, timer: 2000});
                     }
                 });
             });
         });
     </script>
+    @if($isEdit === false && request()->routeIs('products.show'))
+        <script>
+            $(function () {
+                $("input, textarea, select").prop("disabled", true);
+            });
+        </script>
+    @endif
 @endpush

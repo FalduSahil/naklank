@@ -5,14 +5,11 @@ namespace App\Http\Controllers\Admin\Product;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\Product\ProductRequest;
 use App\Models\CartItem;
-use App\Models\Category;
 use App\Models\Product;
 use App\Models\ProductImage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
-use function PHPUnit\Framework\isEmpty;
 
 class ProductController extends Controller
 {
@@ -29,8 +26,8 @@ class ProductController extends Controller
      */
     public function create()
     {
-        $all_category = Category::all(['id', 'name']);
-        return view('admin.product.add', compact(['all_category']));
+        $isEdit = false;
+        return view('admin.product.modal', compact(['isEdit']));
     }
 
     /**
@@ -39,16 +36,12 @@ class ProductController extends Controller
     public function store(ProductRequest $request)
     {
         $data = [
-            'slug' => Str::slug($request->slug, '-'),
-            'category_id' => $request->category_id,
-            'label_id' => $request->label_id,
-            'quantity' => $request->quantity,
-            'per_box_quantity' => $request->per_box_quantity,
-            'price' => $request->price,
             'name' => $request->name,
-            'product_for' => $request->product_for,
+            'slug' => Str::slug($request->slug, '-'),
             'description' => $request->description,
-            'product_code' => $request->product_code,
+            'category_id' => $request->category_id,
+            'price' => $request->price,
+            'quantity' => $request->quantity,
             'status' => $request->status,
         ];
         $main_image = $request->file('main_image');
@@ -79,7 +72,8 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
-        return view('admin.product.show', compact(['product']));
+        $isEdit = false;
+        return view('admin.product.modal', compact(['product', 'isEdit']));
     }
 
     /**
@@ -87,7 +81,8 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
-       return view('admin.product.edit', compact(['product']));
+        $isEdit = true;
+        return view('admin.product.modal', compact(['product', 'isEdit']));
     }
 
     /**
@@ -96,16 +91,12 @@ class ProductController extends Controller
     public function update(ProductRequest $request, Product $product)
     {
         $data = [
-            'slug' => Str::slug($request->slug, '-'),
-            'category_id' => $request->category_id,
-            'label_id' => $request->label_id,
-            'quantity' => $request->quantity,
-            'per_box_quantity' => $request->per_box_quantity,
-            'price' => $request->price,
             'name' => $request->name,
-            'product_for' => $request->product_for,
+            'slug' => Str::slug($request->slug, '-'),
             'description' => $request->description,
-            'product_code' => $request->product_code,
+            'category_id' => $request->category_id,
+            'price' => $request->price,
+            'quantity' => $request->quantity,
             'status' => $request->status,
         ];
         if($request->images){

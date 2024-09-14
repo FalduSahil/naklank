@@ -19,7 +19,7 @@
                                     <img class="profile-user-img img-fluid img-circle"
                                          src="{{ getPath('admin') }}/img/64.png" alt="Z-Zone">
                                 </div>
-                                <h3 class="profile-username text-center">{{ getAuthUser('admin')->name }}</h3>
+                                <h3 class="profile-username text-center">{{ auth()->user()->name }}</h3>
                             </div>
                         </div>
                     </div>
@@ -43,7 +43,7 @@
                                             <div class="form-group row">
                                                 <label for="inputName2" class="col-sm-2 col-form-label">Name</label>
                                                 <div class="col-sm-10">
-                                                    <input type="text" class="form-control" name="name" id="name" placeholder="Name" value="{{ getAuthUser('admin')->name }}">
+                                                    <input type="text" class="form-control" name="name" id="name" placeholder="Name" value="{{ auth()->user()->name }}">
                                                     @error('name')
                                                     <p class="custom-error">{{ $message  }}</p>
                                                     @enderror
@@ -52,7 +52,7 @@
                                             <div class="form-group row">
                                                 <label for="inputName2" class="col-sm-2 col-form-label">Email</label>
                                                 <div class="col-sm-10">
-                                                    <input type="text" class="form-control" name="email" id="email" placeholder="Email" value="{{ old('email') ?? getAuthUser('admin')->email }}">
+                                                    <input type="text" class="form-control" name="email" id="email" placeholder="Email" value="{{ old('email') ?? auth()->user()->email }}">
                                                     @error('email')
                                                     <p class="custom-error">{{ $message  }}</p>
                                                     @enderror
@@ -116,7 +116,14 @@
     <script>
         $(function () {
             ajaxSetup();
-            /*validateRequest('updateProfile', {
+            validateRequest('updateProfile', {
+                name: {
+                    required: true,
+                },
+                email: {
+                    email: true,
+                    required: true,
+                },
                 current_password: {
                     minlength: 8,
                     remote:{ url:"{{ route('checkOldPassword') }}", type:"post", data:{'_token':'{{ csrf_token() }}'} },
@@ -140,7 +147,7 @@
                     minlength: "Please enter at least 8 characters",
                     equalTo: "Please enter same password as new password"
                 },
-            });*/
+            });
         });
     </script>
 @endpush

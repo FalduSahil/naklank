@@ -33,6 +33,15 @@ return [
     /*Profile*/
     'PROFILE_UPDATED' => 'Profile Updated Successfully',
 
+    /*Inquiry*/
+    'INQUIRY_DELETED' => 'Inquiry Deleted Successfully.',
+
+    /*Status*/
+    'STATUS' => [
+        'active' => 'Active',
+        'inactive' => 'Inactive',
+    ],
+
     /*Email*/
     'FROM_EMAIL' => env('MAIL_USERNAME') ?? 'info@zzonemicrogoldjewellery.com',
     'FROM_NAME' => env('MAIL_FROM_NAME') ?? 'Z-Zone'

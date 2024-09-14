@@ -16,7 +16,7 @@ class ProductRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return (bool)getAuthUser('admin');
+        return auth()->user()->user_type === "admin";
     }
 
     /**
@@ -28,12 +28,9 @@ class ProductRequest extends FormRequest
     {
         return [
             'name' => 'required',
-            'product_code' => 'required',
             'description' => 'required',
             'category_id' => 'required',
-            'label_id' => 'required',
             'quantity' => 'required|min:1|int',
-            'per_box_quantity' => 'required|min:1|int',
             'price' => 'required|min:1|int',
             'main_image' => Rule::requiredIf(function (){
                 if (Product::whereId($this->id)->whereNotNull('main_image')->exists()) {
@@ -47,9 +44,8 @@ class ProductRequest extends FormRequest
                 }
                 return true;
             }),
-            'slug' => ['required', Rule::unique('products', 'slug')->ignore($this->id, 'id'), Rule::unique('categories', 'slug')],
-            'status' => 'required',
-            'product_for' => 'required',
+            'slug' => ['required', Rule::unique('products', 'slug')->ignore($this->id, 'id')],
+            'status' => 'required'
         ];
     }
 
@@ -69,16 +65,12 @@ class ProductRequest extends FormRequest
     {
         return [
             'name.required' => 'Please enter product name',
-            'product_code.required' => 'Please enter product code',
             'description.required' => 'Please enter product description',
             'category_id.required' => 'Please select product category',
-            'label_id.required' => 'Please select product label',
             'quantity.required' => 'Please enter product box quantity',
-            'per_box_quantity.required' => 'Please enter product per box piece',
             'quantity.min' => 'Please enter product quantity greater then 1',
             'images.required' => 'Please upload product images',
-            'status.required' => 'Please select product status',
-            'product_for.required' => 'Please select product for',
+            'status.required' => 'Please select product status'
         ];
     }
 }

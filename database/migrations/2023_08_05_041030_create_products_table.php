@@ -13,16 +13,17 @@ return new class extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('category_id')->references('id')->on('categories');
+            $table->unsignedBigInteger('category_id')->comment('id_of_categories')->nullable();
             $table->string('slug')->unique();
             $table->string('name', 255)->comment('product_name')->nullable();
             $table->integer('price')->comment('product_price')->nullable();
             $table->integer('quantity')->comment('product_quantity')->nullable();
-            $table->integer('main_image')->comment('product_image')->nullable();
+            $table->string('main_image')->comment('product_image')->nullable();
             $table->longText('description')->comment('product_description')->nullable();
             $table->enum('status', ['active', 'inactive'])->default('active')->comment('product_status')->nullable();
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrent()->useCurrentOnUpdate();
+            $table->foreign('category_id')->references('id')->on('categories');
         });
     }
 

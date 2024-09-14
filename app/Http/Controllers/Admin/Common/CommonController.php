@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Models\CartItem;
 use App\Models\Category;
 use App\Models\Inquiry;
-use App\Models\Label;
 use App\Models\Order;
 use App\Models\Product;
 use App\Models\User;
@@ -107,15 +106,33 @@ class CommonController extends Controller
         return view('admin.profile.profile');
     }
 
+    public function checkOldPassword(Request $request)
+    {
+        $user_id = getAuthUser('web')->id ?? '';
+        $old_password = getAuthUser('web')->password ?? '';
+        $password = $request->current_password ?? '';
+        if (Hash::check($password, $old_password)){
+            $userInfo = User::whereId($user_id)->get()->toArray();
+            if (count($userInfo) > 0){
+                echo "true";
+            } else {
+                echo "false";
+            }
+        } else {
+            echo "false";
+        }
+        exit;
+    }
+
     public function updateProfile(Request $request)
     {
         $validator = Validator::make($request->all(), [
             'name' => 'required',
             'email' => [
                 'required',
-                Rule::unique('users')->ignore(getAuthUser('admin')->id),
+                Rule::unique('users')->ignore(auth()->id()),
             ],
-            'current_password' => 'nullable|min:8|current_password:admin',
+            'current_password' => 'nullable|min:8|current_password:web',
             'password' => 'nullable|min:8|confirmed',
         ], [
             'name.required' => 'Please enter name',
@@ -146,7 +163,7 @@ class CommonController extends Controller
         $update['name'] = $name;
         $update['email'] = $email;
 
-        $user = User::whereId(getAuthUser('admin')->id)->update($update);
+        $user = User::whereId(auth()->id())->update($update);
         if($user){
             return redirect()->back()->with(['success' => true]);
         }

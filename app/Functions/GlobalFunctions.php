@@ -1,7 +1,6 @@
 <?php
 
 use App\Models\Category;
-use App\Models\Label;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Config;
 
@@ -23,6 +22,9 @@ function getPath($path)
     if($path == 'web'){
         return asset('assets/web');
     }
+    if($path == 'common'){
+        return asset('assets/common');
+    }
     return asset('assets');
 }
 
@@ -35,19 +37,6 @@ function getPublicPathConstant($key)
 function getCategories()
 {
     return Category::all();
-}
-
-function getLabels($id = '')
-{
-    if($id){
-        return Label::whereCategoryId($id)->get();
-    }
-    return Label::whereStatus('active')->get();
-}
-
-function generateOrderNumber()
-{
-    return 'ORD-' . mt_rand(1000, 9999) . '-' . mt_rand(1000, 9999);
 }
 
 function generateRandomPassword($length = 8) {

@@ -65,8 +65,11 @@
                                             <label for="status">User Status</label>
                                             <select id="status" name="status" class="form-control">
                                                 <option selected="" disabled="">Select Status</option>
-                                                <option @selected(old('status', ($isEdit ? $user->status : '')) == 'active') value="active">Active</option>
-                                                <option @selected(old('status', ($isEdit ? $user->status : '')) == 'inactive') value="inactive">Inactive</option>
+                                                @foreach(getConstant("STATUS") as $key => $value)
+                                                    <option @selected(old('status', ($isEdit ? $user->status : '')) == $key)
+                                                            value="{{ $key }}">{{ $value }}
+                                                    </option>
+                                                @endforeach
                                             </select>
                                             @error('status')
                                             <p class="mt-1 custom-error">{{ $message  }}</p>
