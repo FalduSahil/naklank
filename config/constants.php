@@ -42,6 +42,10 @@ return [
         'inactive' => 'Inactive',
     ],
 
+    /*Pagination Value*/
+    'CATEGORY_COUNT' => 10,
+    'PRODUCT_COUNT' => 10,
+
     /*Email*/
     'FROM_EMAIL' => env('MAIL_USERNAME') ?? 'info@zzonemicrogoldjewellery.com',
     'FROM_NAME' => env('MAIL_FROM_NAME') ?? 'Z-Zone'

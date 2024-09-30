@@ -53,7 +53,7 @@
     <script src="{{ getPath('admin') }}/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
     <script src="{{ getPath('admin') }}/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
     <script src="{{ getPath('admin') }}/plugins/sweetalert2/sweetalert2.min.js"></script>
-    <script src="{{ getPath('admin') }}/custom/js/custom.js"></script>
+    <script src="{{ getPath('common') }}/js/custom/custom.js"></script>
     @includeWhen(session('success'), 'admin.includes.toast', ['message' => session('edit') ? 'PRODUCT_UPDATED' : 'PRODUCT_ADDED'])
     <script>
         $(function () {

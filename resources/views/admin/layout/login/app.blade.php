@@ -16,7 +16,7 @@
 <script src="{{ getPath('admin') }}/plugins/jquery/jquery.min.js"></script>
 <script src="{{ getPath('admin') }}/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <script src="{{ getPath('admin') }}/js/adminlte.min.js"></script>
-<script src="{{ getPath('admin') }}/plugins/jquery-validation/jquery.validate.min.js"></script>
+<script src="{{ getPath('common') }}/js/plugins/jquery-validation/jquery.validate.min.js"></script>
 <script>
     $(function (){
         $('#loginForm').validate({

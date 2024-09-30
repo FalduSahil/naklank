@@ -6,12 +6,24 @@ use App\Http\Controllers\Admin\Common\CommonController;
 use App\Http\Controllers\Admin\Order\OrderController;
 use App\Http\Controllers\Admin\Product\ProductController;
 use App\Http\Controllers\Admin\User\UserController;
+use App\Http\Controllers\Home\Auth\AuthController;
+use App\Http\Controllers\Home\HomeController;
+use App\Http\Controllers\Home\Shop\ShopController;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+/*Home*/
+Route::get('/', [HomeController::class, 'index'])->name('home');
+
+/*Shop*/
+Route::get('products', [ShopController::class, 'shop'])->name('products');
+Route::get('products/{slug}', [ShopController::class, 'getProduct'])->name('getProduct');
+
+/*Category*/
+Route::get('category/{slug?}', [ShopController::class, 'categories'])->name('categories');
+
+/*Sorting*/
+Route::post('sort-products', [ShopController::class, 'sortProducts'])->name('sortProducts');
 
 /*Clear Cache*/
 Route::get('clear-cache', function () {
@@ -39,6 +51,13 @@ Route::middleware('guest')->group(function () {
     Route::get('admin', function () {
         return redirect()->route('loginAdmin');
     });
+
+    /*User Login*/
+    Route::get('login', [AuthController::class, 'showLoginForm'])->name('login');
+    Route::get('forgot-password', [AuthController::class, 'showForgotPassword'])->name('showForgotPassword');
+    Route::post('forgot-password', [AuthController::class, 'forgotPassword'])->name('forgotPassword')->middleware('throttle:1,1');
+    Route::post('login', [AuthController::class, 'login'])->name('userLogin');
+    Route::post('check-email',[AuthController::class, 'checkEmail'])->name('checkEmail');
 });
 
 Route::middleware(['auth', 'userAccess:admin', 'PreventBackHistory'])->prefix('admin')->group(function () {
@@ -92,4 +111,10 @@ Route::middleware(['auth', 'userAccess:admin', 'PreventBackHistory'])->prefix('a
 
     /*Logout Admin*/
     Route::post('logout-admin', [AdminAuthController::class, 'logout'])->name('logoutAdmin');
+});
+
+Route::middleware(['auth', 'userAccess:user', 'PreventBackHistory'])->group(function () {
+
+    /*Logout Admin*/
+    Route::get('logout-user', [AuthController::class, 'logout'])->name('logoutUser');
 });

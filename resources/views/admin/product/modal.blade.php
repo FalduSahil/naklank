@@ -176,9 +176,9 @@
 @push('scripts')
     <script src="{{ getPath('admin') }}/plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
     <script src="{{ getPath('admin') }}/plugins/dropzone/dropzone.min.js"></script>
-    <script src="{{ getPath('admin') }}/plugins/jquery-validation/jquery.validate.min.js"></script>
+    <script src="{{ getPath('common') }}/js/plugins/jquery-validation/jquery.validate.min.js"></script>
     <script src="{{ getPath('admin') }}/plugins/sweetalert2/sweetalert2.min.js"></script>
-    <script src="{{ getPath('admin') }}/custom/js/custom.js"></script>
+    <script src="{{ getPath('common') }}/js/custom/custom.js"></script>
     <script>
         Dropzone.autoDiscover = false;
         bsCustomFileInput.init();

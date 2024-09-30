@@ -109,9 +109,9 @@
 @endsection
 
 @push('scripts')
-    <script src="{{ getPath('admin') }}/plugins/jquery-validation/jquery.validate.min.js"></script>
+    <script src="{{ getPath('common') }}/js/plugins/jquery-validation/jquery.validate.min.js"></script>
     <script src="{{ getPath('admin') }}/plugins/sweetalert2/sweetalert2.min.js"></script>
-    <script src="{{ getPath('admin') }}/custom/js/custom.js"></script>
+    <script src="{{ getPath('common') }}/js/custom/custom.js"></script>
     @includeWhen(session('success'), 'admin.includes.toast', ['message' => session('edit') ? 'USER_UPDATED' : 'PROFILE_UPDATED'])
     <script>
         $(function () {

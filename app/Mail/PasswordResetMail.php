@@ -30,7 +30,7 @@ class PasswordResetMail extends Mailable
     {
         return new Envelope(
             from: new Address(getConstant('FROM_EMAIL'), getConstant('FROM_NAME')),
-            subject: 'Password Reset Request For Z-Zone Account',
+            subject: 'Password Reset Request For Naklank Account',
         );
     }
 

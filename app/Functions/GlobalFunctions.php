@@ -19,11 +19,14 @@ function getPath($path)
     if($path == 'admin'){
         return asset('assets/admin');
     }
-    if($path == 'web'){
-        return asset('assets/web');
+    if($path == 'home'){
+        return asset('assets/home');
     }
     if($path == 'common'){
         return asset('assets/common');
+    }
+    if($path == 'upload'){
+        return asset('assets/uploads');
     }
     return asset('assets');
 }

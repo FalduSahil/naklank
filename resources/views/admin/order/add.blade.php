@@ -137,9 +137,9 @@
 @endsection
 
 @push('scripts')
-    <script src="{{ getPath('admin') }}/plugins/jquery-validation/jquery.validate.min.js"></script>
+    <script src="{{ getPath('common') }}/js/plugins/jquery-validation/jquery.validate.min.js"></script>
     <script src="{{ getPath('admin') }}/plugins/sweetalert2/sweetalert2.min.js"></script>
-    <script src="{{ getPath('admin') }}/custom/js/custom.js"></script>
+    <script src="{{ getPath('common') }}/js/custom/custom.js"></script>
     <script src="{{ getPath('admin') }}/plugins/select2/js/select2.full.min.js"></script>
     <script>
         function updateSubtotals() {
