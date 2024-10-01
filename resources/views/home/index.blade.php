@@ -1,83 +1,53 @@
 @extends('home.layout.app')
 
+@push('styles')
+    <link href="{{ getPath('home') }}/libs/tiny-slider/dist/tiny-slider.css" rel="stylesheet"/>
+    <link href="{{ getPath('home') }}/libs/slick-carousel/slick/slick.css" rel="stylesheet"/>
+    <link href="{{ getPath('home') }}/libs/slick-carousel/slick/slick-theme.css" rel="stylesheet"/>
+    <link href="{{ getPath('home') }}/libs/simplebar/dist/simplebar.min.css" rel="stylesheet"/>
+@endpush
+
 @section('content')
     <section class="mt-8">
         <div class="container">
-            <!-- row -->
             <div class="row">
                 <div class="col-xxl-8 col-xl-7">
-                    <!-- hero slider -->
                     <div class="hero-slider">
                         <div style="background: url({{ getPath('home') }}/images/slider/slider-image-1.jpg) no-repeat; background-size: cover; border-radius: 0.5rem">
                             <div class="ps-lg-12 py-lg-16 col-xxl-7 col-lg-9 py-14 px-8 text-xs-center">
-                                <!-- badge -->
                                 <div class="d-flex align-items-center mb-4">
-                                    <span>Exclusive Offer</span>
-                                    <span class="badge bg-danger ms-2">15%</span>
+                                    <span class="text-white">Exclusive Offer</span>
                                 </div>
-                                <!-- title -->
-                                <h2 class="text-dark display-5 fw-bold mb-3">Best Online Deals, Free Stuff</h2>
-                                <p class="fs-5 text-dark">Only on this week... Don’t miss</p>
-                                <!-- price -->
-                                <div class="mb-4 mt-4">
-                                 <span class="text-dark">
-                                    Start from
-                                    <span class="fs-4 text-danger ms-1">$5.99</span>
-                                 </span>
-                                </div>
-                                <!-- btn -->
-                                <a href="#" class="btn btn-primary">
+                                <h2 class="display-5 text-white fw-bold mb-3">Best Online Deals For Peanut Oil</h2>
+                                <p class="fs-5 text-white">Only on this week... Don’t miss</p>
+                                <a href="{{ route('products') }}" class="btn btn-primary">
                                     Get Best Deal
                                     <i class="feather-icon icon-arrow-right ms-1"></i>
                                 </a>
                             </div>
                         </div>
-                        <!-- img -->
                         <div style="background: url({{ getPath('home') }}/images/slider/slider-image-2.jpg) no-repeat; background-size: cover; border-radius: 0.5rem">
                             <div class="ps-lg-12 py-lg-16 col-xxl-7 col-lg-9 py-14 ps-8 text-xs-center">
-                                <!-- badge -->
                                 <div class="d-flex align-items-center mb-4">
-                                    <span>Exclusive Offer</span>
-                                    <span class="badge bg-danger ms-2">35%</span>
+                                    <span class="text-white">Limited Time Offer</span>
                                 </div>
-
-                                <!-- title -->
-                                <h2 class="text-dark display-5 fw-bold mb-3">Chocozay wafer-rolls Deals</h2>
-                                <!-- para -->
-                                <p class="fs-5 text-dark">Only on this week... Don’t miss</p>
-                                <div class="mb-4 mt-4">
-                                 <span class="text-dark">
-                                    Start from
-                                    <span class="fs-4 text-danger ms-1">$34.99</span>
-                                 </span>
-                                </div>
-                                <!-- btn -->
-                                <a href="#" class="btn btn-primary">
+                                <h2 class="text-white display-5 fw-bold mb-3">Fresh And Pure Peanut Oil For Everyone</h2>
+                                <p class="fs-5 text-white">From your nearest local farms</p>
+                                <a href="{{ route('products') }}" class="btn btn-primary">
                                     Shop Deals Now
                                     <i class="feather-icon icon-arrow-right ms-1"></i>
                                 </a>
                             </div>
                         </div>
-                        <!-- img -->
                         <div style="background: url({{ getPath('home') }}/images/slider/slider-image-3.jpg) no-repeat; background-size: cover; border-radius: 0.5rem">
                             <div class="ps-lg-12 py-lg-16 col-xxl-7 col-lg-9 py-14 ps-8 text-xs-center">
-                                <!-- badge -->
                                 <div class="d-flex align-items-center mb-4">
-                                    <span>Exclusive Offer</span>
-                                    <span class="badge bg-danger ms-2">20%</span>
+                                    <span class="text-white">Purchase Now</span>
                                 </div>
-                                <!-- title -->
-                                <h2 class="text-dark display-5 fw-bold mb-3">Cokoladni Kolutici Lasta</h2>
-                                <!-- para -->
-                                <p class="fs-5 text-dark">Only on this week... Don’t miss</p>
-                                <div class="mb-4 mt-4">
-                                 <span class="text-dark">
-                                    Start from
-                                    <span class="fs-4 text-primary ms-1">$5.99</span>
-                                 </span>
-                                </div>
-                                <!-- btn -->
-                                <a href="#" class="btn btn-primary">
+                                <h2 class="text-white display-5 fw-bold mb-3">Extraordinary Peanuts For Extraordinary People</h2>
+                                <p class="fs-5 text-white">The taste of uniqueness in every drop</p>
+
+                                <a href="{{ route('products') }}" class="btn btn-primary">
                                     Shop This Week Offer
                                     <i class="feather-icon icon-arrow-right ms-1"></i>
                                 </a>
@@ -89,41 +59,36 @@
                     <div class="flex-fill px-8 py-9 mb-6 rounded"
                          style="background: url({{ getPath('home') }}/images/banner/ad-banner-1.jpg) no-repeat; background-size: cover">
                         <div>
-                            <h3 class="mb-0 fw-bold">
-                                10% cashback on
+                            <h3 class="mb-0 text-black fw-bold">
+                                Discover a new world of peanuts:
                                 <br/>
-                                personal care
+                                Uniqueness guaranteed
                             </h3>
-                            <div class="mt-4 mb-5 fs-5">
-                                <p class="mb-0">Max cashback: $12</p>
-                                <span>
-                                 Code:
-                                 <span class="fw-bold text-dark">CARE12</span>
-                              </span>
+                            <div class="mt-4 text-black mb-5 fs-5">
+                                <p class="mb-0">The taste of uniqueness</p>
                             </div>
-                            <a href="index-3.html#" class="btn btn-dark">Shop Now</a>
+                            <a href="{{ route('products') }}" class="btn btn-dark">Shop Now</a>
                         </div>
                     </div>
 
                     <div class="flex-fill px-8 py-8 rounded"
                          style="background: url({{ getPath('home') }}/images/banner/ad-banner-2.jpg) no-repeat; background-size: cover">
-                        <!-- Banner Content -->
                         <div>
                             <!-- Banner Content -->
                             <h3 class="fw-bold mb-3">
-                                Say yes to
+                                Peanuts fit for royalty:
                                 <br/>
-                                season’s fresh
+                                Taste the class
                             </h3>
-                            <div class="mt-4 mb-5 fs-5">
+                            <div class="mt-4 text-dark mb-5 fs-5">
                                 <p class="fs-5 mb-0">
-                                    Refresh your day
+                                    Go beyond ordinary
                                     <br/>
-                                    the fruity way
+                                    Peanuts with a twist
                                 </p>
                             </div>
 
-                            <a href="index-3.html#" class="btn btn-dark">Shop Now</a>
+                            <a href="{{ route('products') }}" class="btn btn-dark">Shop Now</a>
                         </div>
                     </div>
                 </div>
@@ -191,19 +156,19 @@
                                     </li>
                                     <!-- nav item -->
                                     @php($i = 0)
-                                    @foreach($products as $product)
-                                        @if($i < 5 && $product->getCategory)
+                                    @foreach($categories as $category)
+                                        @if($i < 5 && $category)
                                             <li class="nav-item">
                                                 <a
                                                         href="#"
                                                         class="nav-link"
-                                                        id="nav-{{ $product->getCategory->id }}-tab"
+                                                        id="nav-{{ $category->id }}-tab"
                                                         data-bs-toggle="tab"
-                                                        data-bs-target="#nav-{{ $product->getCategory->id }}"
+                                                        data-bs-target="#nav-{{ $category->id }}"
                                                         role="tab"
-                                                        aria-controls="nav-{{ $product->getCategory->id }}"
+                                                        aria-controls="nav-{{ $category->id }}"
                                                         aria-selected="false">
-                                                    {{ $product->getCategory->name }}
+                                                    {{ $category->name }}
                                                 </a>
                                             </li>
                                             @php($i++)
@@ -314,3 +279,10 @@
     </section>
 
 @endsection
+
+@push('scripts')
+    <script src="{{ getPath('home') }}/libs/slick-carousel/slick/slick.min.js"></script>
+    <script src="{{ getPath('home') }}/js/vendors/slick-slider.js"></script>
+    <script src="{{ getPath('home') }}/libs/tiny-slider/dist/min/tiny-slider.js"></script>
+    <script src="{{ getPath('home') }}/js/vendors/tns-slider.js"></script>
+@endpush

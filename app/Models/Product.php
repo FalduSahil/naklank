@@ -26,7 +26,7 @@ class Product extends Model
 
     public static function getDataTable()
     {
-        $data = self::all();
+        $data = self::with(['getCategory'])->get();
         return DataTables::of($data)
             ->editColumn('category', function ($record) {
                 return $record->getCategory->name ?? '-';

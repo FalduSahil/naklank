@@ -55,7 +55,7 @@
                         <img height="40" src="{{ getPath('common') }}/images/64.png"
                              alt="{{ getConstant('SITE_NAME') }}"/>
                     </a>
-                    <div class="d-flex align-items-center lh-1">
+                    {{--<div class="d-flex align-items-center lh-1">
                         <div class="list-inline me-2">
                             <div class="list-inline-item">
                                 @guest
@@ -100,12 +100,20 @@
                             </div>
                         </div>
                         <!-- Button -->
+                    </div>--}}
+                    <div class="d-flex align-items-center lh-1">
+                        <div class="list-inline me-2">
+                            <div class="list-inline-item">
+                                    <a href="#" class="text-muted me-5">About Us</a>
+                                    <a href="#" class="text-muted me-5">Contact Us</a>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <div class="col-xxl-3 col-lg-4 d-flex align-items-center justify-content-end">
-                <div class="list-inline d-lg-block d-none">
+            {{--<div class="col-xxl-3 col-lg-4 d-flex align-items-center justify-content-end">
+                <div class="list-inline d-lg-block">
                     <div class="list-inline-item me-5">
                         @guest
                             <a href="{{ route('login') }}" class="text-reset">
@@ -148,7 +156,52 @@
                         @endauth
                     </div>
                 </div>
-            </div>
+            </div>--}}
+            {{--<div class="col-xxl-3 col-lg-4 d-flex align-items-center justify-content-end">
+                <div class="list-inline d-lg-block">
+                    <div class="list-inline-item me-5">
+                        @guest
+                            <a href="{{ route('login') }}" class="text-reset">
+                                <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        width="20"
+                                        height="20"
+                                        viewBox="0 0 24 24"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        stroke-width="2"
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        class="feather feather-user">
+                                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                                    <circle cx="12" cy="7" r="4"></circle>
+                                </svg>
+                            </a>
+                        @endguest
+                        @auth
+                            <a href="#" class="text-reset me-5">
+                                <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        width="20"
+                                        height="20"
+                                        viewBox="0 0 24 24"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        stroke-width="2"
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        class="feather feather-user">
+                                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                                    <circle cx="12" cy="7" r="4"></circle>
+                                </svg>
+                            </a>
+                            <a href="{{ route('logoutUser') }}" class="text-reset">
+                                <i class="feather-icon icon-log-out"></i>
+                            </a>
+                        @endauth
+                    </div>
+                </div>
+            </div>--}}
         </div>
         <div class="offcanvas offcanvas-start p-4 w-xxl-20 w-lg-30" id="navbar-default2">
             <div class="d-flex justify-content-between align-items-center mb-2">
@@ -200,10 +253,10 @@
                         <a class="nav-link" href="{{ route('home') }}" role="button" aria-haspopup="true"
                            aria-expanded="false">Cart</a>
                     </li>
-                    <li class="nav-item dropdown dropdown-flyout">
+                    {{--<li class="nav-item dropdown dropdown-flyout">
                         <a class="nav-link" href="{{ route('home') }}" role="button" aria-haspopup="true"
                            aria-expanded="false">Account</a>
-                    </li>
+                    </li>--}}
                 </ul>
             </div>
         </div>
