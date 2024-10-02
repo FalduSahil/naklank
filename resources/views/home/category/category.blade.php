@@ -28,18 +28,20 @@
                         <div class="d-md-flex justify-content-between align-items-center">
                             <div class="d-flex mt-2 mt-lg-0">
                                 <div>
-                                    <select class="form-select">
-                                        <option selected>Sort by: Featured</option>
-                                        <option value="Low to High">Price: Low to High</option>
-                                        <option value="High to Low">Price: High to Low</option>
-                                        <option value="Release Date">Release Date</option>
-                                        <option value="Avg. Rating">Avg. Rating</option>
+                                    <input type="hidden" id="current_page" value="{{ $products->currentPage() }}">
+                                    <select class="form-select" name="sort" id="sort">
+                                        <option value="latest">Latest</option>
+                                        <option value="oldest">Oldest</option>
+                                        <option value="a-to-z">Name, A to Z</option>
+                                        <option value="z-to-a">Name, Z to A</option>
+                                        <option value="price-highest">Price Low To High</option>
+                                        <option value="price-lowest">Price High To Low</option>
                                     </select>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="row g-4 row-cols-lg-5 row-cols-2 row-cols-md-3 mt-2">
+                    <div id="productDiv" class="row g-4 row-cols-lg-5 row-cols-2 row-cols-md-3 mt-2">
                         @foreach($products as $product)
                             <div class="col">
 
@@ -97,3 +99,21 @@
         </div>
     </section>
 @endsection
+
+@push('scripts')
+    <script src="{{ getPath('common') }}/js/custom/custom.js"></script>
+    <script>
+        $(function(){
+            ajaxSetup();
+            $('#sort').on('change', function () {
+                let selectedValue = $(this).val();
+                let currentPage = $('#current_page').val();
+                ajaxCall('{{ route('sortProducts') }}', {'sort': selectedValue, 'page': currentPage}, 'POST', true).then(function (response) {
+                    if(response.status === true){
+                        $('#productDiv').html(response.html);
+                    }
+                });
+            });
+        });
+    </script>
+@endpush
