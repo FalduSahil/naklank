@@ -12,8 +12,8 @@
             <thead>
             <tr>
                 <th style="border: 1px solid black; text-align: center;">Product</th>
-                <th style="border: 1px solid black; text-align: center;">Box Quantity</th>
-                <th style="border: 1px solid black; text-align: center;">Per Box Price</th>
+                <th style="border: 1px solid black; text-align: center;">Quantity</th>
+                <th style="border: 1px solid black; text-align: center;">Price</th>
                 <th style="border: 1px solid black; text-align: center;">Subtotal</th>
             </tr>
             </thead>
@@ -23,7 +23,6 @@
                     <td style="border: 1px solid black; text-align: center;">{{ $item->product->name }}</td>
                     <td style="border: 1px solid black; text-align: center;">
                         {{ formatNumber($item->quantity) }} <br>
-                        ( Per Box Piece : {{ $item->product->per_box_quantity }} )
                     </td>
                     <td style="border: 1px solid black; text-align: center;">
                         &#8377;{{ formatNumber($item->product->price) }}</td>

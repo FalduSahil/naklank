@@ -28,8 +28,9 @@ class ShopController extends Controller
     public function getProduct($slug)
     {
         $product = Product::with(['getCategory', 'getProductImages'])->whereStatus('active')->where('quantity', '>', '0')->where('main_image', '!=', null)->where('slug', $slug)->first();
+        $product_others = Product::whereStatus('active')->where('quantity', '>', '0')->where('main_image', '!=', null)->where('slug', '!=', $slug)->get();
         if($product){
-            return view('home.product.product', compact(['product']));
+            return view('home.product.product', compact(['product', 'product_others']));
         }
         abort('404');
     }

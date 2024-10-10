@@ -3,59 +3,33 @@
         <div class="row g-4 py-4">
             <div class="col-12 col-md-12 col-lg-8">
                 <div class="row g-4">
-                    <div class="col-6 col-sm-6 col-md-3">
-                        <h6 class="mb-4">Get to know us</h6>
-                        <!-- list -->
-                        <ul class="nav flex-column">
-                            <li class="nav-item mb-2"><a href="index-3.html#!" class="nav-link">Company</a></li>
-                            <li class="nav-item mb-2"><a href="index-3.html#!" class="nav-link">About</a></li>
-                            <li class="nav-item mb-2"><a href="index-3.html#1" class="nav-link">Blog</a></li>
-                            <li class="nav-item mb-2"><a href="index-3.html#!" class="nav-link">Help Center</a></li>
-                            <li class="nav-item mb-2"><a href="index-3.html#!" class="nav-link">Our Value</a></li>
-                        </ul>
+                    <div class="col-6 col-sm-6 col-md-6">
+                        <h6 class="mb-4">Address</h6>
+                        <div class="list-inline-item me-3">
+                         <a href="https://maps.app.goo.gl/1ba99qhppgJvPDiC7" target="_blank"
+                           rel="nofollow, noreferrer, noindex" class="text-reset">Kasturbadham (Tramba), Besides Mohandham Aashram, Bhavnagar Highway, Rajkot</a>
+                        </div>
                     </div>
-                    <div class="col-6 col-sm-6 col-md-3">
-                        <h6 class="mb-4">For Consumers</h6>
-                        <ul class="nav flex-column">
-                            <!-- list -->
-                            <li class="nav-item mb-2"><a href="index-3.html#!" class="nav-link">Payments</a></li>
-                            <li class="nav-item mb-2"><a href="index-3.html#!" class="nav-link">Shipping</a></li>
-                            <li class="nav-item mb-2"><a href="index-3.html#!" class="nav-link">Product Returns</a></li>
-                            <li class="nav-item mb-2"><a href="index-3.html#!" class="nav-link">FAQ</a></li>
-                            <li class="nav-item mb-2"><a href="shop-checkout.html" class="nav-link">Shop Checkout</a>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="col-6 col-sm-6 col-md-3">
-                        <h6 class="mb-4">Become a Shopper</h6>
-                        <ul class="nav flex-column">
-                            <!-- list -->
-                            <li class="nav-item mb-2"><a href="index-3.html#!" class="nav-link">Shopper
-                                    Opportunities</a></li>
-                            <li class="nav-item mb-2"><a href="index-3.html#!" class="nav-link">Become a Shopper</a>
-                            </li>
-                            <li class="nav-item mb-2"><a href="index-3.html#!" class="nav-link">Earnings</a></li>
-                            <li class="nav-item mb-2"><a href="index-3.html#!" class="nav-link">Ideas & Guides</a></li>
-                            <li class="nav-item mb-2"><a href="index-3.html#!" class="nav-link">New Retailers</a></li>
-                        </ul>
-                    </div>
-                    <div class="col-6 col-sm-6 col-md-3">
-                        <h6 class="mb-4">Freshcart programs</h6>
-                        <ul class="nav flex-column">
-                            <!-- list -->
-                            <li class="nav-item mb-2"><a href="index-3.html#!" class="nav-link">Freshcart programs</a>
-                            </li>
-                            <li class="nav-item mb-2"><a href="index-3.html#!" class="nav-link">Gift Cards</a></li>
-                            <li class="nav-item mb-2"><a href="index-3.html#!" class="nav-link">Promos & Coupons</a>
-                            </li>
-                            <li class="nav-item mb-2"><a href="index-3.html#!" class="nav-link">Freshcart Ads</a></li>
-                            <li class="nav-item mb-2"><a href="index-3.html#!" class="nav-link">Careers</a></li>
-                        </ul>
+                    <div class="col-6 col-sm-6 col-md-6">
+                        <h6 class="mb-4">Contact Details</h6>
+                        <div class="list-inline-item me-3">
+                            <a href="tel:9979656575" class="text-reset">
+                                <i class="feather-icon icon-phone-call me-2"></i>
+                                Chirag Bhanderi - 99796 56575
+                            </a>
+                        </div>
+
+                        <div class="list-inline-item me-3">
+                            <a href="tel:9879400857" class="text-reset">
+                                <i class="feather-icon icon-phone-call me-2"></i>
+                                Shailesh Nasit - 98794 00857
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="border-top py-4">
+        <div class="border-top mt-5 py-4">
             <div class="row align-items-center">
                 <div class="col-md-6">
                      <span class="small text-muted">

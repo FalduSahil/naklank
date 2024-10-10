@@ -14,12 +14,12 @@
         @include('admin.includes.bread-crumbs', ['title' => 'Orders', 'link' => route('orders.index'), 'addOrEdit' => ''])
         <div class="content">
             <div class="container-fluid">
-                <div class="row">
+                {{--<div class="row">
                     <div class="col-12">
                         <a href="{{ route('orders.create') }}" type="button"
                            class="btn btn-success float-right mb-4"><i class="fa fa-plus"></i> Add Order</a>
                     </div>
-                </div>
+                </div>--}}
                 <div class="row">
                     <div class="col-12">
                         <div class="card">
@@ -28,11 +28,10 @@
                                     <thead>
                                     <tr>
                                         <th><span>Order Number</span></th>
-                                        <th><span>Client</span></th>
-                                        <th><span>Phone</span></th>
+                                        <th><span>Name</span></th>
                                         <th><span>Email</span></th>
+                                        <th><span>Phone</span></th>
                                         <th><span>Order Total</span></th>
-                                        <th><span>Order Status</span></th>
                                         <th><span>Actions</span></th>
                                     </tr>
                                     </thead>
@@ -69,11 +68,10 @@
                 paging: true,
                 columns: [
                     {data: 'id', name: 'id'},
-                    {data: 'client', name: 'client', width: '15%'},
+                    {data: 'name', name: 'name', width: '15%'},
                     {data: 'phone', name: 'number', width: '15%'},
                     {data: 'email', name: 'email', width: '15%'},
                     {data: 'total', name: 'total'},
-                    {data: 'status', name: 'status'},
                     {data: 'actions', name: 'actions', orderable: false, searchable: false},
                 ]
             });

@@ -10,13 +10,13 @@ class HomeController extends Controller
 {
     public function index()
     {
-        $categories = Category::whereStatus('active')->select(['id', 'name', 'slug', 'image'])->limit(12)->get();
+//        $categories = Category::whereStatus('active')->select(['id', 'name', 'slug', 'image'])->limit(12)->get();
         $products = Product::with(['getCategory' => function ($query) {
             $query->select(['id', 'name']);
         }])
             ->where('status', 'active')
             ->select(['id', 'category_id', 'slug', 'name', 'price', 'quantity', 'main_image'])
             ->get();
-        return view('home.index', compact(['categories', 'products']));
+        return view('home.index', compact(['products']));
     }
 }

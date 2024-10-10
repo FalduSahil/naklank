@@ -1,6 +1,6 @@
 @extends('admin.layout.app')
 
-@section('title', $order->order_number)
+@section('title', $order->id)
 
 @section('content')
     <div class="content-wrapper">
@@ -21,15 +21,14 @@
                         Shipping Info:
                         <br>
                         <address>
-                            Client: <strong>{{ $order->user->name }}</strong><br>
+                            Name: <strong>{{ $order->name }}</strong><br>
                             Address: {{ $order->address }}<br>
-                            Phone: {{ $order->phone }}<br>
-                            Email: {{ $order->email }}
+                            Phone: <a href="tel:{{ $order->phone }}">{{ $order->phone }}</a><br>
+                            Email: <a href="mailto:{{ $order->email }}">{{ $order->email }}</a>
                         </address>
                     </div>
                     <div class="col-6">
                         <b>Order ID:</b> {{ $order->id }}<br>
-                        <b>Order Status:</b> {{ ucfirst($order->status) }}<br>
                     </div>
                 </div>
                 <div class="row">
@@ -41,7 +40,6 @@
                                 <th>Product</th>
                                 <th>Product Image</th>
                                 <th>Product Price</th>
-                                <th>Product Code</th>
                                 <th>Quantity</th>
                                 <th>Subtotal</th>
                             </tr>
@@ -57,7 +55,6 @@
                                         <img class="rounded mx-3" height="70" width="70" src="{{ asset(getConstant('PRODUCT_IMAGE_PATH').$products->product->main_image) }}">
                                     </td>
                                     <td>{{ '₹'.formatNumber($products->product->price) }}</td>
-                                    <td>{{ $products->product->product_code }}</td>
                                     <td>{{ $products->quantity }}</td>
                                     <td>{{ '₹'.formatNumber($products->sub_total) }}</td>
                                 </tr>

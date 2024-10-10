@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\Order\OrderController;
 use App\Http\Controllers\Admin\Product\ProductController;
 use App\Http\Controllers\Admin\User\UserController;
 use App\Http\Controllers\Home\Auth\AuthController;
+use App\Http\Controllers\Home\Checkout\CheckOutController;
 use App\Http\Controllers\Home\HomeController;
 use App\Http\Controllers\Home\Shop\ShopController;
 use Illuminate\Support\Facades\Artisan;
@@ -24,6 +25,11 @@ Route::get('category/{slug?}', [ShopController::class, 'categories'])->name('cat
 
 /*Sorting*/
 Route::post('sort-products', [ShopController::class, 'sortProducts'])->name('sortProducts');
+
+/*Orders*/
+Route::post('place-order', [CheckOutController::class, 'placeOrder'])->name('placeOrderWeb');
+
+Route::match(['get', 'post'], 'product/search', [App\Http\Controllers\Home\Common\CommonController::class, 'search'])->name('search');
 
 /*Clear Cache*/
 Route::get('clear-cache', function () {

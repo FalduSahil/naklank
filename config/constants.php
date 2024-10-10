@@ -48,5 +48,9 @@ return [
 
     /*Email*/
     'FROM_EMAIL' => env('MAIL_USERNAME') ?? 'info@zzonemicrogoldjewellery.com',
-    'FROM_NAME' => env('MAIL_FROM_NAME') ?? 'Z-Zone'
+    'FROM_NAME' => env('MAIL_FROM_NAME') ?? 'Z-Zone',
+
+    /*Admin Email*/
+//    'EMAIL' => 'web91.sahil@gmail.com'
+    'EMAIL' => 'chiragmbhanderi@gmail.com'
 ];

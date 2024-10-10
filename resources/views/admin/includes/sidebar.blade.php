@@ -25,13 +25,13 @@
                         <p>Products</p>
                     </a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item d-none">
                     <a @class(['active' => request()->routeIs('users.*'), 'nav-link']) href="{{ route('users.index') }}">
                         <i class="fas fa-users nav-icon"></i>
                         <p>Clients</p>
                     </a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item d-none">
                     <a @class(['active' => request()->routeIs('inquiries.*'), 'nav-link']) href="{{ route('inquiries.index') }}">
                         <i class="fas fa-comment nav-icon"></i>
                         <p>Inquiries</p>

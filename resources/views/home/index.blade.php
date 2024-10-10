@@ -1,5 +1,9 @@
 @extends('home.layout.app')
 
+@php
+    $product_link = 'https://naklankminioilmill.in/products/15-kg-peanut-oil'
+@endphp
+
 @push('styles')
     <link href="{{ getPath('home') }}/libs/tiny-slider/dist/tiny-slider.css" rel="stylesheet"/>
     <link href="{{ getPath('home') }}/libs/slick-carousel/slick/slick.css" rel="stylesheet"/>
@@ -20,7 +24,7 @@
                                 </div>
                                 <h2 class="display-5 text-white fw-bold mb-3">Best Online Deals For Peanut Oil</h2>
                                 <p class="fs-5 text-white">Only on this week... Don’t miss</p>
-                                <a href="{{ route('products') }}" class="btn btn-primary">
+                                <a href="{{ $product_link }}" class="btn btn-primary">
                                     Get Best Deal
                                     <i class="feather-icon icon-arrow-right ms-1"></i>
                                 </a>
@@ -33,7 +37,7 @@
                                 </div>
                                 <h2 class="text-white display-5 fw-bold mb-3">Fresh And Pure Peanut Oil For Everyone</h2>
                                 <p class="fs-5 text-white">From your nearest local farms</p>
-                                <a href="{{ route('products') }}" class="btn btn-primary">
+                                <a href="{{ $product_link }}" class="btn btn-primary">
                                     Shop Deals Now
                                     <i class="feather-icon icon-arrow-right ms-1"></i>
                                 </a>
@@ -47,7 +51,7 @@
                                 <h2 class="text-white display-5 fw-bold mb-3">Extraordinary Peanuts For Extraordinary People</h2>
                                 <p class="fs-5 text-white">The taste of uniqueness in every drop</p>
 
-                                <a href="{{ route('products') }}" class="btn btn-primary">
+                                <a href="{{ $product_link }}" class="btn btn-primary">
                                     Shop This Week Offer
                                     <i class="feather-icon icon-arrow-right ms-1"></i>
                                 </a>
@@ -67,7 +71,7 @@
                             <div class="mt-4 text-black mb-5 fs-5">
                                 <p class="mb-0">The taste of uniqueness</p>
                             </div>
-                            <a href="{{ route('products') }}" class="btn btn-dark">Shop Now</a>
+                            <a href="{{ $product_link }}" class="btn btn-dark">Shop Now</a>
                         </div>
                     </div>
 
@@ -88,7 +92,7 @@
                                 </p>
                             </div>
 
-                            <a href="{{ route('products') }}" class="btn btn-dark">Shop Now</a>
+                            <a href="{{ $product_link }}" class="btn btn-dark">Shop Now</a>
                         </div>
                     </div>
                 </div>
@@ -96,7 +100,7 @@
         </div>
     </section>
 
-    <section class="my-lg-14 my-8">
+    {{--<section class="my-lg-14 my-8">
         <div class="container">
             <div class="row">
                 <div class="col-12">
@@ -122,22 +126,21 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section>--}}
 
     <section class="mb-lg-14 mb-8">
         <div class="container">
             <!-- row -->
             <div class="row">
                 <div class="col-12">
-                    <div class="mb-6 d-xl-flex justify-content-between align-items-center">
+                    <div class="mb-6 d-xl-flex text-center mt-5 justify-content-center align-items-center">
                         <!-- heading -->
                         <div class="mb-5 mb-xl-0">
-                            <h3 class="mb-0">New Products</h3>
-                            <p class="mb-0">New products with updated stocks</p>
+                            <h2 class="mb-0">Trending Products</h2>
                         </div>
                         <div>
                             <!-- nav -->
-                            <nav>
+                            {{--<nav>
                                 <ul class="nav nav-pills nav-scroll border-bottom-0 gap-1" id="nav-tab" role="tablist">
                                     <!-- nav item -->
                                     <li class="nav-item">
@@ -175,7 +178,7 @@
                                         @endif
                                     @endforeach
                                 </ul>
-                            </nav>
+                            </nav>--}}
                         </div>
                     </div>
                 </div>
@@ -188,7 +191,7 @@
                         <div class="tab-pane fade show active" id="nav-all" role="tabpanel"
                              aria-labelledby="nav-all-tab" tabindex="0">
                             <!-- row -->
-                            <div class="row row-cols-2 row-cols-xl-5 row-cols-md-3 g-4">
+                            <div class="row row-cols-2 row-cols-xl-2 row-cols-md-2 g-4">
                                 @foreach($products as $product)
                                     <div class="col">
                                         <div class="card card-product-v2 h-100">
@@ -209,13 +212,20 @@
                                                     <div>
                                                         <span class="text-danger">&#8377; {{ $product->price }}</span>
                                                     </div>
-                                                    <div><span class="text-uppercase small text-primary">In Stock</span>
+                                                    @if($product->quantity <= 0)
+                                                    <div>
+                                                        <span class="text-uppercase small text-primary">Out Of Stock</span>
                                                     </div>
+                                                    @else
+                                                        <div>
+                                                            <span class="text-uppercase small text-primary">In Stock</span>
+                                                        </div>
+                                                    @endif
                                                 </div>
                                                 <!-- btn -->
                                                 <div class="product-fade-block">
                                                     <div class="d-grid mt-4">
-                                                        <a href="#" class="btn btn-primary rounded-pill">Add to Cart</a>
+                                                        <a data-id="{{ $product->id }}" data-name="{{ $product->name }}" href="javascript:void(0)" class="btn btn-primary rounded-pill openModal">Order Now</a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -257,8 +267,7 @@
                                                         <!-- btn -->
                                                         <div class="product-fade-block">
                                                             <div class="d-grid mt-4">
-                                                                <a href="#" class="btn btn-primary rounded-pill">Add to
-                                                                    Cart</a>
+                                                                <a data-id="{{ $product->id }}" data-name="{{ $product->name }}" href="javascript:void(0)" class="btn btn-primary rounded-pill openModal">Order Now</a>
                                                             </div>
                                                         </div>
                                                     </div>
